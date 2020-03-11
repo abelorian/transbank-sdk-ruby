@@ -35,6 +35,8 @@ module Transbank
               details_hash[:installments_number] = hash.fetch('installments_number')
               details_hash
             end
+            
+            puts details_hash
 
             body = {
               username: username,
@@ -42,8 +44,15 @@ module Transbank
               buy_order: parent_buy_order,
               details: details_array
             }
+            
+            puts body
+            
             resp = http_post(uri_string: url, body: body, headers: headers, camel_case_keys: false)
+            
+            puts resp
             body = JSON.parse(resp.body)
+            
+            puts body
             return ::Transbank::Webpay::Oneclick::MallTransactionAuthorizeResponse.new(body) if resp.kind_of? Net::HTTPSuccess
             raise Oneclick::Errors::MallTransactionAuthorizeError.new(body['error_message'], resp.code)
           end
