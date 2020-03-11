@@ -12,6 +12,7 @@ module Transbank
 
           def authorize(username:, tbk_user:, parent_buy_order:, details:,
                         options: nil)
+            p "............................... gem autorize"
             api_key = options&.api_key || default_integration_params[:api_key]
             commerce_code = options&.commerce_code || default_integration_params[:commerce_code]
             integration_type = options&.integration_type || default_integration_params[:integration_type]
@@ -36,7 +37,7 @@ module Transbank
               details_hash
             end
             
-            puts details_hash
+            puts details_array
 
             body = {
               username: username,
