@@ -20,6 +20,9 @@ module Transbank
 
             url = base_url + AUTHORIZE_TRANSACTION_ENDPOINT
             headers = webpay_headers(commerce_code: commerce_code, api_key: api_key)
+            
+            p url
+            p headers
 
             details_array = details.map do |det|
               hash = det.reduce({}) do |acc, (k, v)|
